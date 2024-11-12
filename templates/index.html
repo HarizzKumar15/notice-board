@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="notice-board">
+        <h1>Notice Board</h1>
+        <a href="{{ url_for('add_notice') }}">Add Notice</a>
+
+        <ul class="notice-list">
+            {% for notice in notices %}
+                <li class="notice-item">
+                    <h2>{{ notice.title }}</h2>
+                    <p>{{ notice.content }}</p>
+                    <form action="{{ url_for('delete_notice', id=notice.id) }}" method="post" style="display:inline;">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
